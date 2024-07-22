@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Timeless Knowledge</title>
+    <title>Outdated High School Facts for Your Grad Year</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
@@ -19,11 +19,17 @@
         }
         h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
+            font-size: 2.5rem;
             font-weight: 700;
             color: #212529;
             margin-bottom: 2rem;
             letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+        @media (min-width: 768px) {
+            h1 {
+                font-size: 3.5rem;
+            }
         }
         input[type="number"] {
             font-family: 'Raleway', sans-serif;
@@ -37,16 +43,51 @@
             outline: none;
             border-bottom-color: #212529;
         }
-        button {
+        .modern-button {
             font-family: 'Raleway', sans-serif;
-            background-color: #212529;
-            transition: all 0.3s ease;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
             font-weight: 600;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 123, 255, 0.1);
+            position: relative;
+            overflow: hidden;
         }
-        button:hover {
-            background-color: #343a40;
+        .modern-button:hover {
+            background-color: #0056b3;
+            box-shadow: 0 6px 8px rgba(0, 123, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        .modern-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 123, 255, 0.1);
+        }
+        .modern-button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+        .modern-button:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+        @keyframes ripple {
+            0% { transform: scale(0, 0); opacity: 1; }
+            20% { transform: scale(25, 25); opacity: 1; }
+            100% { opacity: 0; transform: scale(40, 40); }
         }
         #factsList {
             max-height: 600px;
@@ -83,13 +124,13 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="text-center">Timeless Knowledge</h1>
+        <h1 class="text-center">Outdated High School Facts for Your Grad Year</h1>
         <div class="max-w-md mx-auto mb-12">
             <label for="graduationYear" class="block text-sm font-medium text-gray-600 mb-2">Enter your high school graduation year</label>
             <input type="number" id="graduationYear" class="w-full bg-transparent focus:outline-none" placeholder="e.g., 1990">
         </div>
         <div class="text-center mb-16">
-            <button onclick="generateFacts()" class="px-8 py-3 rounded-full text-white text-sm hover:shadow-lg">Reveal Outdated Facts</button>
+            <button onclick="generateFacts()" class="modern-button">Reveal Outdated Facts</button>
         </div>
         <div id="yearDisplay" class="year-display text-center mb-8"></div>
         <div id="factsList"></div>
