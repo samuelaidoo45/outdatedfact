@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timeless Knowledge</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #212529;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+        }
+        input[type="number"] {
+            font-family: 'Raleway', sans-serif;
+            transition: all 0.3s ease;
+            border: none;
+            border-bottom: 2px solid #dee2e6;
+            font-size: 1.25rem;
+            padding: 0.5rem 0;
+        }
+        input[type="number"]:focus {
+            outline: none;
+            border-bottom-color: #212529;
+        }
+        button {
+            font-family: 'Raleway', sans-serif;
+            background-color: #212529;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+        button:hover {
+            background-color: #343a40;
+        }
+        #factsList {
+            max-height: 600px;
+            overflow-y: auto;
+            padding-right: 1rem;
+        }
+        .fact-item {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        .fact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        .year-display {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #343a40;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Timeless Knowledge</h1>
+        <div class="max-w-md mx-auto mb-12">
+            <label for="graduationYear" class="block text-sm font-medium text-gray-600 mb-2">Enter your high school graduation year</label>
+            <input type="number" id="graduationYear" class="w-full bg-transparent focus:outline-none" placeholder="e.g., 1990">
+        </div>
+        <div class="text-center mb-16">
+            <button onclick="generateFacts()" class="px-8 py-3 rounded-full text-white text-sm hover:shadow-lg">Reveal Outdated Facts</button>
+        </div>
+        <div id="yearDisplay" class="year-display text-center mb-8"></div>
+        <div id="factsList"></div>
+    </div>
+
+    <script>
+        const outdatedFacts = {
+            1960: [
+                "Pluto is the ninth planet in our solar system.",
+                "The atom is the smallest unit of matter.",
+                "Humans only use 10% of their brains.",
+                "The Great Wall of China is visible from space.",
+                "Neanderthals were primitive and unintelligent.",
+            ],
+            1970: [
+                "Dinosaurs were cold-blooded and sluggish.",
+                "The tongue has distinct taste zones for different flavors.",
+                "Humans evolved from chimpanzees.",
+                "The appendix is a useless organ.",
+                "Sugar causes hyperactivity in children.",
+            ],
+            1980: [
+                "Acid rain is the biggest threat to forests.",
+                "The food pyramid is the best guide for a healthy diet.",
+                "Ulcers are caused primarily by stress and spicy foods.",
+                "There are only five senses.",
+                "The right side of the brain is creative, the left side is logical.",
+            ],
+            1990: [
+                "Fat in food is bad for you.",
+                "The Internet is just a fad.",
+                "You need to wait 24 hours before reporting a missing person.",
+                "Carrots dramatically improve your eyesight.",
+                "We only use a small percentage of our DNA.",
+            ],
+            2000: [
+                "Pluto is still considered a planet.",
+                "Multitasking increases productivity.",
+                "You need 8 glasses of water a day.",
+                "Humans can't grow new brain cells.",
+                "MSG causes headaches and other symptoms in everyone.",
+            ],
+            2010: [
+                "Attention spans are shrinking due to technology.",
+                "Breakfast is the most important meal of the day for everyone.",
+                "You need to stretch before exercising to prevent injury.",
+                "Cracking your knuckles causes arthritis.",
+                "Humans have only five tastes: sweet, sour, salty, bitter, and umami.",
+            ]
+        };
+
+        function generateFacts() {
+            const year = parseInt(document.getElementById('graduationYear').value);
+            const factsList = document.getElementById('factsList');
+            const yearDisplay = document.getElementById('yearDisplay');
+            factsList.innerHTML = '';
+            yearDisplay.innerHTML = '';
+
+            if (isNaN(year) || year < 1960 || year > 2023) {
+                factsList.innerHTML = '<p class="text-red-500 text-center">Please enter a valid year between 1960 and 2023.</p>';
+                return;
+            }
+
+            let factsDecade = Math.floor(year / 10) * 10;
+            if (factsDecade < 1960) factsDecade = 1960;
+            if (factsDecade > 2010) factsDecade = 2010;
+
+            const facts = outdatedFacts[factsDecade];
+            
+            if (facts) {
+                yearDisplay.textContent = `Class of ${year}`;
+                facts.forEach((fact, index) => {
+                    const div = document.createElement('div');
+                    div.className = 'fact-item fade-in-up';
+                    div.style.animationDelay = `${index * 0.1}s`;
+                    div.textContent = fact;
+                    factsList.appendChild(div);
+                });
+            } else {
+                factsList.innerHTML = '<p class="text-center">No outdated facts found for this year.</p>';
+            }
+        }
+    </script>
+</body>
+</html>
