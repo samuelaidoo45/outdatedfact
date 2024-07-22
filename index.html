@@ -13,7 +13,7 @@
             color: #212529;
         }
         .container {
-            max-width: 1200px;
+            max-width: 800px;
             margin: 0 auto;
             padding: 4rem 2rem;
         }
@@ -25,11 +25,19 @@
             margin-bottom: 2rem;
             letter-spacing: -0.02em;
             line-height: 1.2;
+            text-align: center;
         }
         @media (min-width: 768px) {
             h1 {
-                font-size: 3.5rem;
+                font-size: 3rem;
             }
+        }
+        .input-container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
         }
         input[type="number"] {
             font-family: 'Raleway', sans-serif;
@@ -38,10 +46,12 @@
             border-bottom: 2px solid #dee2e6;
             font-size: 1.25rem;
             padding: 0.5rem 0;
+            width: 100%;
+            background-color: transparent;
         }
         input[type="number"]:focus {
             outline: none;
-            border-bottom-color: #212529;
+            border-bottom-color: #007bff;
         }
         .modern-button {
             font-family: 'Raleway', sans-serif;
@@ -58,6 +68,9 @@
             box-shadow: 0 4px 6px rgba(0, 123, 255, 0.1);
             position: relative;
             overflow: hidden;
+            display: block;
+            width: 100%;
+            margin-top: 1rem;
         }
         .modern-button:hover {
             background-color: #0056b3;
@@ -90,9 +103,8 @@
             100% { opacity: 0; transform: scale(40, 40); }
         }
         #factsList {
-            max-height: 600px;
-            overflow-y: auto;
-            padding-right: 1rem;
+            max-height: none;
+            overflow-y: visible;
         }
         .fact-item {
             background-color: white;
@@ -119,20 +131,19 @@
             font-weight: 700;
             color: #343a40;
             margin-bottom: 1rem;
+            text-align: center;
         }
     </style>
 </head>
-<body>
+<body class="bg-gray-100">
     <div class="container">
-        <h1 class="text-center">Outdated High School Facts for Your Grad Year</h1>
-        <div class="max-w-md mx-auto mb-12">
+        <h1>Outdated High School Facts for Your Grad Year</h1>
+        <div class="input-container">
             <label for="graduationYear" class="block text-sm font-medium text-gray-600 mb-2">Enter your high school graduation year</label>
-            <input type="number" id="graduationYear" class="w-full bg-transparent focus:outline-none" placeholder="e.g., 1990">
-        </div>
-        <div class="text-center mb-16">
+            <input type="number" id="graduationYear" class="focus:outline-none" placeholder="e.g., 1990">
             <button onclick="generateFacts()" class="modern-button">Reveal Outdated Facts</button>
         </div>
-        <div id="yearDisplay" class="year-display text-center mb-8"></div>
+        <div id="yearDisplay" class="year-display"></div>
         <div id="factsList"></div>
     </div>
 
